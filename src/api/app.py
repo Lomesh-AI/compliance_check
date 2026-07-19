@@ -283,7 +283,7 @@ def check_status(job_id):
 
 # ── Serve Frontend ────────────────────────────────────────────────────────────
 # This allows Flask to serve the frontend directly, avoiding CORS/Codespaces issues.
-FRONTEND_DIR = Path(__file__).parent.parent.parent / "frontend"
+FRONTEND_DIR = Path(__file__).parent.parent.parent / "docs"
 
 @app.route('/')
 def serve_index():
