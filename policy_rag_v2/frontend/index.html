@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>PolicyRAG v2 — DPDP Compliance</title>
+<style>
+/* ── Design: deep legal navy + warm white + saffron accent ───────────── */
+/* Palette chosen for legal domain: authoritative but readable            */
+:root {
+  --navy:    #0f1f3d;
+  --navy-2:  #1a3160;
+  --saffron: #f4891f;
+  --amber:   #fbbf24;
+  --white:   #f9f7f4;
+  --text:    #1c1c1e;
+  --muted:   #6b7280;
+  --pass:    #16a34a;
+  --fail:    #dc2626;
+  --insuff:  #d97706;
+  --border:  #e5e0d8;
+  --card:    #ffffff;
+  --mono:    'JetBrains Mono', 'Fira Code', monospace;
+  --sans:    'Inter', system-ui, sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--sans);
+  background: var(--white);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+/* ── Header ── */
+header {
+  background: var(--navy);
+  color: #fff;
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  height: 60px;
+  border-bottom: 3px solid var(--saffron);
+}
+header .logo {
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+header .logo span { color: var(--saffron); }
+header .badge {
+  font-size: 0.65rem;
+  background: var(--saffron);
+  color: var(--navy);
+  padding: 2px 8px;
+  border-radius: 99px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+#status-dot {
+  margin-left: auto;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: #6b7280;
+  flex-shrink: 0;
+}
+#status-dot.ok   { background: #22c55e; }
+#status-dot.err  { background: #ef4444; }
+#status-label { font-size: 0.75rem; color: #9ca3af; }
+
+/* ── Layout ── */
+.layout {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  height: calc(100vh - 60px);
+}
+
+/* ── Sidebar ── */
+.sidebar {
+  background: var(--navy);
+  color: #e2e8f0;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+.sidebar nav a {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.85rem 1.5rem;
+  text-decoration: none;
+  color: #94a3b8;
+  font-size: 0.85rem;
+  font-weight: 500;
+  border-left: 3px solid transparent;
+  transition: all 0.15s;
+  cursor: pointer;
+}
+.sidebar nav a:hover,
+.sidebar nav a.active {
+  color: #fff;
+  background: rgba(255,255,255,0.06);
+  border-left-color: var(--saffron);
+}
+.sidebar nav a .icon { font-size: 1rem; flex-shrink: 0; }
+.sidebar-section {
+  padding: 1.25rem 1.5rem 0.5rem;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #475569;
+}
+.kg-stat-box {
+  margin: 0.5rem 1rem 1rem;
+  background: rgba(255,255,255,0.05);
+  border-radius: 8px;
+  padding: 0.9rem;
+}
+.kg-stat { display: flex; justify-content: space-between; font-size: 0.75rem; margin-bottom: 4px; }
+.kg-stat .label { color: #94a3b8; }
+.kg-stat .val   { font-weight: 600; color: #f1f5f9; }
+.kg-stat .val.oblig  { color: #fbbf24; }
+.kg-stat .val.prohib { color: #f87171; }
+.kg-stat .val.perm   { color: #86efac; }
+.kg-stat .val.entit  { color: #93c5fd; }
+
+/* ── Main content ── */
+main {
+  overflow-y: auto;
+  padding: 2rem;
+}
+.page { display: none; }
+.page.active { display: block; }
+
+h1 { font-size: 1.4rem; font-weight: 700; margin-bottom: 0.35rem; }
+h2 { font-size: 1rem; font-weight: 600; margin-bottom: 1rem; color: var(--navy); }
+.subtitle { color: var(--muted); font-size: 0.85rem; margin-bottom: 1.5rem; }
+
+/* ── Cards ── */
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.5rem;
+  margin-bottom: 1.25rem;
+}
+
+/* ── Upload area ── */
+.upload-zone {
+  border: 2px dashed var(--border);
+  border-radius: 10px;
+  padding: 2.5rem;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+  margin-bottom: 1rem;
+}
+.upload-zone:hover, .upload-zone.drag { border-color: var(--saffron); background: #fff8f0; }
+.upload-zone .upload-icon { font-size: 2rem; margin-bottom: 0.5rem; }
+.upload-zone p { font-size: 0.85rem; color: var(--muted); }
+.upload-zone strong { color: var(--text); }
+#file-input { display: none; }
+
+/* ── Buttons ── */
+.btn {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.6rem 1.25rem;
+  border: none; border-radius: 7px;
+  font-size: 0.85rem; font-weight: 600;
+  cursor: pointer; transition: all 0.15s;
+}
+.btn-primary { background: var(--saffron); color: var(--navy); }
+.btn-primary:hover { background: #e07a10; }
+.btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+.btn-ghost { background: transparent; color: var(--muted); border: 1px solid var(--border); }
+.btn-ghost:hover { background: #f3f4f6; }
+
+/* ── QA input ── */
+.qa-input-row { display: flex; gap: 0.75rem; margin-bottom: 1rem; }
+.qa-input {
+  flex: 1;
+  padding: 0.65rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  font-size: 0.9rem;
+  font-family: var(--sans);
+  outline: none;
+  transition: border-color 0.15s;
+}
+.qa-input:focus { border-color: var(--saffron); }
+
+/* ── Results ── */
+.result-header {
+  display: flex; align-items: center; gap: 1rem;
+  margin-bottom: 1rem;
+}
+.verdict-badge {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  padding: 0.3rem 0.9rem;
+  border-radius: 99px;
+  font-size: 0.8rem; font-weight: 700;
+  letter-spacing: 0.05em; text-transform: uppercase;
+}
+.verdict-badge.pass   { background: #dcfce7; color: var(--pass); }
+.verdict-badge.fail   { background: #fee2e2; color: var(--fail); }
+.verdict-badge.insuff { background: #fef3c7; color: var(--insuff); }
+.verdict-badge.unknown{ background: #f3f4f6; color: #6b7280; }
+
+.rule-row {
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.5rem;
+  display: flex; align-items: flex-start; gap: 0.75rem;
+}
+.rule-row .dot {
+  width: 8px; height: 8px;
+  border-radius: 50%; flex-shrink: 0; margin-top: 5px;
+}
+.rule-row .dot.pass   { background: var(--pass); }
+.rule-row .dot.fail   { background: var(--fail); }
+.rule-row .dot.insuff { background: var(--insuff); }
+.rule-row .dot.unknown{ background: #9ca3af; }
+.rule-row .rule-subject { font-weight: 600; font-size: 0.85rem; }
+.rule-row .rule-reason  { font-size: 0.78rem; color: var(--muted); margin-top: 2px; }
+
+.source-chip {
+  display: inline-block;
+  background: #f3f4f6;
+  border-radius: 5px;
+  padding: 2px 8px;
+  font-size: 0.72rem;
+  font-family: var(--mono);
+  margin: 2px;
+  color: var(--navy-2);
+}
+
+.faithfulness-bar {
+  height: 6px;
+  border-radius: 3px;
+  background: #e5e7eb;
+  margin: 0.5rem 0;
+  overflow: hidden;
+}
+.faithfulness-bar .fill {
+  height: 100%;
+  border-radius: 3px;
+  background: linear-gradient(90deg, var(--pass), var(--amber));
+  transition: width 0.4s ease;
+}
+
+.answer-box {
+  background: #f9fafb;
+  border-left: 3px solid var(--saffron);
+  border-radius: 0 7px 7px 0;
+  padding: 1rem 1.25rem;
+  font-size: 0.88rem;
+  line-height: 1.65;
+  white-space: pre-wrap;
+}
+
+/* ── KG Explorer ── */
+.subject-pill {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 99px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  border: 1px solid var(--border);
+  cursor: pointer;
+  margin: 3px;
+  transition: all 0.12s;
+}
+.subject-pill:hover, .subject-pill.active {
+  background: var(--navy); color: #fff; border-color: var(--navy);
+}
+.triple-row {
+  padding: 0.6rem 0;
+  border-bottom: 1px solid #f0ece5;
+  display: grid;
+  grid-template-columns: 160px 170px 1fr 90px;
+  gap: 0.5rem;
+  font-size: 0.82rem;
+  align-items: center;
+}
+.triple-row:last-child { border-bottom: none; }
+.triple-row .subj { color: var(--navy); font-weight: 600; }
+.triple-row .pred { font-family: var(--mono); font-size: 0.74rem; color: var(--muted); }
+.triple-row .obj  { color: var(--text); }
+.deontic-tag {
+  font-size: 0.67rem; font-weight: 700; letter-spacing: 0.05em;
+  padding: 2px 7px; border-radius: 4px; text-transform: uppercase;
+}
+.deontic-tag.obligation  { background: #fef3c7; color: #92400e; }
+.deontic-tag.prohibition { background: #fee2e2; color: #991b1b; }
+.deontic-tag.permission  { background: #dcfce7; color: #14532d; }
+.deontic-tag.entitlement { background: #dbeafe; color: #1e3a8a; }
+
+/* ── Loading ── */
+.loading {
+  display: flex; align-items: center; gap: 0.75rem;
+  color: var(--muted); font-size: 0.85rem; padding: 1rem 0;
+}
+.spinner {
+  width: 18px; height: 18px;
+  border: 2px solid #e5e7eb;
+  border-top-color: var(--saffron);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.hidden { display: none !important; }
+.error-msg {
+  color: var(--fail); background: #fee2e2;
+  border-radius: 7px; padding: 0.75rem 1rem;
+  font-size: 0.83rem; margin-bottom: 1rem;
+}
+
+/* ── Overall verdict banner ── */
+.verdict-banner {
+  border-radius: 10px;
+  padding: 1rem 1.5rem;
+  display: flex; align-items: center; gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+.verdict-banner.pass   { background: #dcfce7; border-left: 5px solid var(--pass); }
+.verdict-banner.fail   { background: #fee2e2; border-left: 5px solid var(--fail); }
+.verdict-banner.partial{ background: #fef3c7; border-left: 5px solid var(--insuff); }
+.verdict-banner .big   { font-size: 1.5rem; font-weight: 800; }
+.verdict-banner .sub   { font-size: 0.8rem; color: var(--muted); margin-top: 2px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">Policy<span>RAG</span> v2</div>
+  <div class="badge">DPDP Act 2023</div>
+  <div style="margin-left:auto;display:flex;align-items:center;gap:0.5rem">
+    <div id="status-label">checking...</div>
+    <div id="status-dot"></div>
+  </div>
+</header>
+
+<div class="layout">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-section">Navigation</div>
+    <nav>
+      <a class="active" data-page="check" onclick="showPage('check',this)">
+        <span class="icon">📋</span> Compliance Check
+      </a>
+      <a data-page="qa" onclick="showPage('qa',this)">
+        <span class="icon">💬</span> Ask DPDP Act
+      </a>
+      <a data-page="kg" onclick="showPage('kg',this)">
+        <span class="icon">🕸️</span> KG Explorer
+      </a>
+    </nav>
+
+    <div class="sidebar-section" style="margin-top:1rem">Deontic KG</div>
+    <div class="kg-stat-box" id="kg-stats">
+      <div class="kg-stat"><span class="label">Total rules</span><span class="val" id="kg-total">—</span></div>
+      <div class="kg-stat"><span class="label">Obligations</span><span class="val oblig" id="kg-oblig">—</span></div>
+      <div class="kg-stat"><span class="label">Prohibitions</span><span class="val prohib" id="kg-prohib">—</span></div>
+      <div class="kg-stat"><span class="label">Permissions</span><span class="val perm" id="kg-perm">—</span></div>
+      <div class="kg-stat"><span class="label">Entitlements</span><span class="val entit" id="kg-entit">—</span></div>
+    </div>
+  </aside>
+
+  <!-- Main -->
+  <main>
+
+    <!-- ── Compliance Check page ── -->
+    <div id="page-check" class="page active">
+      <h1>Compliance Check</h1>
+      <p class="subtitle">Upload a business privacy policy PDF to check it against DPDP Act 2023 obligations.</p>
+
+      <div class="card">
+        <div class="upload-zone" id="upload-zone" onclick="document.getElementById('file-input').click()">
+          <div class="upload-icon">📄</div>
+          <p><strong>Click to upload</strong> or drag and drop a PDF</p>
+          <p id="file-name" style="margin-top:0.5rem;color:var(--saffron);font-weight:600"></p>
+        </div>
+        <input type="file" id="file-input" accept=".pdf" onchange="onFileSelect(event)"/>
+        <button class="btn btn-primary" id="check-btn" onclick="runCheck()" disabled>
+          ▶ Run Compliance Check
+        </button>
+      </div>
+
+      <div id="check-loading" class="loading hidden">
+        <div class="spinner"></div>
+        Running compliance check and extracting policy triples...
+      </div>
+      <div id="check-error" class="error-msg hidden"></div>
+      <div id="check-results" class="hidden"></div>
+    </div>
+
+    <!-- ── Ask page ── -->
+    <div id="page-qa" class="page">
+      <h1>Ask the DPDP Act</h1>
+      <p class="subtitle">Ask any question about India's Digital Personal Data Protection Act 2023.</p>
+
+      <div class="card">
+        <div class="qa-input-row">
+          <input
+            class="qa-input" id="qa-input" type="text"
+            placeholder="e.g. What are the rights of a Data Principal?"
+            onkeydown="if(event.key==='Enter') runAsk()"
+          />
+          <button class="btn btn-primary" onclick="runAsk()">Ask →</button>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:0.4rem">
+          <button class="btn btn-ghost" onclick="setQ('What are the rights of a Data Principal?')">Rights</button>
+          <button class="btn btn-ghost" onclick="setQ('What obligations does a Data Fiduciary have regarding consent?')">Consent</button>
+          <button class="btn btn-ghost" onclick="setQ('What must be done in case of a data breach?')">Data Breach</button>
+          <button class="btn btn-ghost" onclick="setQ('What are the penalties under DPDP Act?')">Penalties</button>
+        </div>
+      </div>
+
+      <div id="qa-loading" class="loading hidden">
+        <div class="spinner"></div> Retrieving and generating answer...
+      </div>
+      <div id="qa-error" class="error-msg hidden"></div>
+      <div id="qa-results" class="hidden card">
+        <h2>Answer</h2>
+        <div id="qa-answer" class="answer-box"></div>
+
+        <div style="margin-top:1rem">
+          <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:4px">
+            <span style="font-size:0.78rem;color:var(--muted)">Faithfulness</span>
+            <span id="qa-faith" style="font-size:0.8rem;font-weight:700"></span>
+          </div>
+          <div class="faithfulness-bar"><div class="fill" id="qa-faith-bar" style="width:0%"></div></div>
+        </div>
+
+        <div style="margin-top:1rem">
+          <div style="font-size:0.78rem;color:var(--muted);margin-bottom:6px">Sources used</div>
+          <div id="qa-sources"></div>
+        </div>
+
+        <div id="qa-flagged-wrap" class="hidden" style="margin-top:1rem">
+          <div style="font-size:0.78rem;color:var(--fail);margin-bottom:6px">
+            ⚠ Flagged sentences (not grounded in context)
+          </div>
+          <div id="qa-flagged"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── KG Explorer page ── -->
+    <div id="page-kg" class="page">
+      <h1>Knowledge Graph Explorer</h1>
+      <p class="subtitle">Browse all DPDP Act rules in the deontic KG. Filter by subject or deontic type.</p>
+
+      <div class="card">
+        <div id="kg-subjects" style="margin-bottom:1rem"></div>
+        <div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:1rem" id="deontic-filters">
+          <button class="btn btn-ghost" onclick="filterDeontic(null)">All</button>
+          <button class="btn btn-ghost" onclick="filterDeontic('obligation')">Obligations</button>
+          <button class="btn btn-ghost" onclick="filterDeontic('prohibition')">Prohibitions</button>
+          <button class="btn btn-ghost" onclick="filterDeontic('permission')">Permissions</button>
+          <button class="btn btn-ghost" onclick="filterDeontic('entitlement')">Entitlements</button>
+        </div>
+        <div style="background:#f9fafb;border-radius:8px;padding:0.75rem" id="kg-table"></div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+// const API = '/api';
+const API = 'http://localhost:5000/api'; // Or your Render URL later
+let kgData = {};
+let activeSubject = null;
+let activeDeontic = null;
+let selectedFile = null;
+
+// ── Init ──────────────────────────────────────────────────────────────────────
+async function init() {
+  // Health check
+  try {
+    const r = await fetch(`${API}/health`);
+    const d = await r.json();
+    const dot = document.getElementById('status-dot');
+    const lbl = document.getElementById('status-label');
+    if (d.status === 'ok') {
+      dot.className = 'ok';
+      lbl.textContent = `${d.chunks} chunks · ready`;
+    } else {
+      dot.className = 'err';
+      lbl.textContent = 'not ready — run ingest.py';
+    }
+  } catch { 
+    document.getElementById('status-dot').className = 'err';
+    document.getElementById('status-label').textContent = 'server offline';
+  }
+
+  // KG stats
+  try {
+    const r = await fetch(`${API}/kg/summary`);
+    const d = await r.json();
+    document.getElementById('kg-total').textContent  = d.total_triples;
+    document.getElementById('kg-oblig').textContent  = d.obligations;
+    document.getElementById('kg-prohib').textContent = d.prohibitions;
+    document.getElementById('kg-perm').textContent   = d.permissions;
+    document.getElementById('kg-entit').textContent  = d.entitlements;
+
+    // Subjects pills for KG explorer
+    const box = document.getElementById('kg-subjects');
+    box.innerHTML = '<div style="font-size:0.78rem;color:var(--muted);margin-bottom:6px">Filter by subject</div>';
+    const allPill = document.createElement('span');
+    allPill.className = 'subject-pill active';
+    allPill.textContent = 'All';
+    allPill.onclick = () => { activeSubject = null; renderKG(); setActivePill(allPill); };
+    box.appendChild(allPill);
+    (d.subjects || []).forEach(s => {
+      const p = document.createElement('span');
+      p.className = 'subject-pill';
+      p.textContent = s;
+      p.onclick = () => { activeSubject = s; renderKG(); setActivePill(p); };
+      box.appendChild(p);
+    });
+  } catch {}
+
+  // Full KG data
+  try {
+    const r = await fetch(`${API}/kg/rules`);
+    kgData = await r.json();
+    renderKG();
+  } catch {}
+}
+
+function setActivePill(el) {
+  document.querySelectorAll('.subject-pill').forEach(p => p.classList.remove('active'));
+  el.classList.add('active');
+}
+
+// ── Navigation ────────────────────────────────────────────────────────────────
+function showPage(name, el) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.sidebar nav a').forEach(a => a.classList.remove('active'));
+  document.getElementById(`page-${name}`).classList.add('active');
+  el.classList.add('active');
+}
+
+// ── Upload ────────────────────────────────────────────────────────────────────
+const zone = document.getElementById('upload-zone');
+zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('drag'); });
+zone.addEventListener('dragleave', () => zone.classList.remove('drag'));
+zone.addEventListener('drop', e => {
+  e.preventDefault();
+  zone.classList.remove('drag');
+  const f = e.dataTransfer.files[0];
+  if (f && f.name.endsWith('.pdf')) applyFile(f);
+});
+
+function onFileSelect(e) {
+  const f = e.target.files[0];
+  if (f) applyFile(f);
+}
+function applyFile(f) {
+  selectedFile = f;
+  document.getElementById('file-name').textContent = f.name;
+  document.getElementById('check-btn').disabled = false;
+}
+
+// ── Compliance check ──────────────────────────────────────────────────────────
+// async function runCheck() {
+//   if (!selectedFile) return;
+//   show('check-loading'); hide('check-results'); hide('check-error');
+
+//   const fd = new FormData();
+//   fd.append('file', selectedFile);
+
+//   try {
+//     const r = await fetch(`${API}/check`, { method: 'POST', body: fd });
+//     const d = await r.json();
+//     hide('check-loading');
+//     if (d.error) { showError('check-error', d.error); return; }
+//     renderCheckResults(d);
+//   } catch (e) {
+//     hide('check-loading');
+//     showError('check-error', e.message);
+//   }
+// }
+
+function renderCheckResults(d) {
+  const el = document.getElementById('check-results');
+  const vc = d.verdict_counts || {};
+  const total = Object.values(vc).reduce((a,b) => a+b, 0);
+  const v = (d.overall_verdict || '').toLowerCase().split(' ')[0];
+
+  const llmCalls = d.llm_calls ? d.llm_calls.real_api_calls : (d.llm_calls_made || 0);
+
+  let html = `
+    <div class="verdict-banner ${v}">
+      <div>
+        <div class="big">${d.overall_verdict || '?'}</div>
+        <div class="sub">${d.document || ''} · ${total} rules checked · ${d.doc_chunks || 0} chunks · ${llmCalls} LLM calls made</div>
+      </div>
+      <div style="margin-left:auto;display:flex;gap:1rem">
+        ${Object.entries(vc).map(([k,n]) => `
+          <div style="text-align:center">
+            <div style="font-size:1.2rem;font-weight:700">${n}</div>
+            <div style="font-size:0.7rem;text-transform:uppercase;letter-spacing:0.05em;opacity:0.7">${k}</div>
+          </div>`).join('')}
+      </div>
+    </div>
+    <h2>Rule-by-rule results</h2>
+  `;
+
+  (d.rule_results || []).forEach(r => {
+    const verd = r.verdict || 'unknown';
+    html += `
+      <div class="rule-row">
+        <div class="dot ${verd}"></div>
+        <div>
+          <div class="rule-subject">${r.rule_subject}
+            <span class="verdict-badge ${verd}" style="margin-left:0.5rem;font-size:0.65rem">
+              ${verd.replace('_',' ')}
+            </span>
+          </div>
+          <div class="rule-reason">${r.reason || ''}</div>
+          <div style="margin-top:4px;font-size:0.72rem;color:var(--muted)">
+            Query: "${r.query_used || ''}" · ${r.chunks_retrieved || 0} chunks retrieved
+          </div>
+        </div>
+      </div>`;
+  });
+
+  el.innerHTML = html;
+  show('check-results');
+}
+
+async function runCheck() {
+  if (!selectedFile) return;
+  show('check-loading'); hide('check-results'); hide('check-error');
+
+  const fd = new FormData();
+  fd.append('file', selectedFile);
+
+  try {
+    // 1. Start the job
+    const r = await fetch(`${API}/check`, { method: 'POST', body: fd });
+    if (!r.ok) {
+      const text = await r.text();
+      throw new Error(`Server returned ${r.status}. ${text}`);
+    }
+    const d = await r.json();
+    const jobId = d.job_id;
+
+    // 2. Poll for status every 3 seconds
+    const pollInterval = setInterval(async () => {
+      try {
+        const sr = await fetch(`${API}/check/status/${jobId}`);
+        const sd = await sr.json();
+        
+        if (sd.status === 'done') {
+          clearInterval(pollInterval);
+          hide('check-loading');
+          if (sd.result.error) { 
+            showError('check-error', sd.result.error); 
+          } else {
+            renderCheckResults(sd.result);
+          }
+        } else if (sd.status === 'error') {
+          clearInterval(pollInterval);
+          hide('check-loading');
+          showError('check-error', sd.result);
+        }
+      } catch (e) {
+        clearInterval(pollInterval);
+        hide('check-loading');
+        showError('check-error', e.message);
+      }
+    }, 3000);
+
+  } catch (e) {
+    hide('check-loading');
+    showError('check-error', e.message);
+  }
+}
+
+// ── QA ────────────────────────────────────────────────────────────────────────
+function setQ(q) { document.getElementById('qa-input').value = q; }
+
+async function runAsk() {
+  const q = document.getElementById('qa-input').value.trim();
+  if (!q) return;
+  show('qa-loading'); hide('qa-results'); hide('qa-error');
+
+  try {
+    const r = await fetch(`${API}/ask`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ query: q }),
+    });
+    const d = await r.json();
+    hide('qa-loading');
+    if (d.error) { showError('qa-error', d.error); return; }
+    renderQA(d);
+  } catch (e) {
+    hide('qa-loading');
+    showError('qa-error', e.message);
+  }
+}
+
+function renderQA(d) {
+  document.getElementById('qa-answer').textContent = d.answer || '(no answer)';
+
+  const pct = Math.round((d.faithfulness || 0) * 100);
+  document.getElementById('qa-faith').textContent = `${pct}%`;
+  document.getElementById('qa-faith-bar').style.width = `${pct}%`;
+
+  const src = document.getElementById('qa-sources');
+  src.innerHTML = (d.sources || []).map(s =>
+    `<span class="source-chip" title="${s.preview}">[chunk_${s.chunk_id}] ${s.filename} (${s.score})</span>`
+  ).join('');
+
+  const flagged = d.flagged_sentences || [];
+  if (flagged.length) {
+    document.getElementById('qa-flagged').innerHTML = flagged.map(f =>
+      `<div style="font-size:0.78rem;padding:4px 0;border-bottom:1px solid #fee2e2">
+        <span style="color:var(--fail);font-family:var(--mono);margin-right:0.5rem">${f.entailment_score}</span>${f.sentence}
+      </div>`
+    ).join('');
+    show('qa-flagged-wrap');
+  } else { hide('qa-flagged-wrap'); }
+
+  show('qa-results');
+}
+
+// ── KG Explorer ───────────────────────────────────────────────────────────────
+function filterDeontic(type) { activeDeontic = type; renderKG(); }
+
+function renderKG() {
+  const el = document.getElementById('kg-table');
+  let triples = [];
+
+  const data = activeSubject ? { [activeSubject]: kgData[activeSubject] || [] } : kgData;
+  Object.values(data).forEach(arr => { if (arr) triples.push(...arr); });
+
+  if (activeDeontic) triples = triples.filter(t => t.deontic === activeDeontic);
+
+  if (!triples.length) { el.innerHTML = '<div style="color:var(--muted);font-size:0.85rem;padding:1rem">No rules match</div>'; return; }
+
+  el.innerHTML = `
+    <div class="triple-row" style="font-weight:700;font-size:0.75rem;border-bottom:2px solid var(--border);color:var(--muted)">
+      <span>Subject</span><span>Predicate</span><span>Object / Condition</span><span>Type</span>
+    </div>
+    ${triples.map(t => `
+      <div class="triple-row">
+        <span class="subj">${t.subject}</span>
+        <span class="pred">${t.predicate}</span>
+        <span class="obj">
+          ${t.object}
+          ${t.condition ? `<br><span style="font-size:0.72rem;color:var(--muted)">${t.condition}</span>` : ''}
+          ${t.section   ? `<span style="margin-left:6px;font-size:0.7rem;color:#93c5fd">${t.section}</span>` : ''}
+        </span>
+        <span><span class="deontic-tag ${t.deontic}">${t.deontic}</span></span>
+      </div>`).join('')}
+  `;
+}
+
+// ── Helpers ───────────────────────────────────────────────────────────────────
+function show(id) { document.getElementById(id).classList.remove('hidden'); }
+function hide(id) { document.getElementById(id).classList.add('hidden'); }
+function showError(id, msg) {
+  const el = document.getElementById(id);
+  el.textContent = `Error: ${msg}`;
+  el.classList.remove('hidden');
+}
+
+init();
+</script>
+</body>
+</html>

@@ -1,0 +1,578 @@
+[
+  {
+    "subject": "Data Fiduciary",
+    "predicate": "mustProvide",
+    "object": "Notice",
+    "deontic": "obligation",
+    "section": "Section 5",
+    "condition": "before or at time of collecting personal data",
+    "consequence": "Penalty up to INR 200 crore"
+  },
+  {
+    "subject": "Data Fiduciary",
+    "predicate": "mustObtain",
+    "object": "Consent",
+    "deontic": "obligation",
+    "section": "Section 6",
+    "condition": "before processing personal data",
+    "consequence": "Penalty up to INR 250 crore"
+  },
+  {
+    "subject": "Data Fiduciary",
+    "predicate": "mustEnsure",
+    "object": "Data Accuracy",
+    "deontic": "obligation",
+    "section": "Section 8(3)",
+    "condition": "especially when used for decisions affecting Data Principal",
+    "consequence": "Penalty"
+  },
+  {
+    "subject": "Data Fiduciary",
+    "predicate": "mustImplement",
+    "object": "Security Safeguards",
+    "deontic": "obligation",
+    "section": "Section 8(5)",
+    "condition": "at all times during processing",
+    "consequence": "Penalty up to INR 250 crore"
+  },
+  {
+    "subject": "Data Fiduciary",
+    "predicate": "mustProvide",
+    "object": "Grievance Redressal",
+    "deontic": "obligation",
+    "section": "Section 13",
+    "condition": "within reasonable timeframe upon complaint",
+    "consequence": "Penalty"
+  },
+  {
+    "subject": "Data Fiduciary",
+    "predicate": "mustNotify",
+    "object": "Data Breach",
+    "deontic": "obligation",
+    "section": "Section 8(6)",
+    "condition": "as soon as possible after breach is discovered",
+    "consequence": "Penalty up to INR 250 crore"
+  },
+  {
+    "subject": "Data Fiduciary",
+    "predicate": "mustMaintain",
+    "object": "Compliance Records",
+    "deontic": "obligation",
+    "section": "Section 8",
+    "condition": "ongoing obligation",
+    "consequence": "Penalty"
+  },
+  {
+    "subject": "Data Fiduciary",
+    "predicate": "mustDelete",
+    "object": "Personal Data",
+    "deontic": "obligation",
+    "section": "Section 8(7)",
+    "condition": "after purpose is fulfilled or consent is withdrawn",
+    "consequence": "Penalty"
+  },
+  {
+    "subject": "Data Fiduciary",
+    "predicate": "mustNotProcess",
+    "object": "Personal Data",
+    "deontic": "prohibition",
+    "section": "Section 4",
+    "condition": "beyond the consented purpose without fresh consent",
+    "consequence": "Penalty up to INR 250 crore"
+  },
+  {
+    "subject": "Data Fiduciary",
+    "predicate": "mustNotTransfer",
+    "object": "Personal Data",
+    "deontic": "prohibition",
+    "section": "Section 16",
+    "condition": "to countries restricted by Central Government",
+    "consequence": "Penalty"
+  },
+  {
+    "subject": "Significant Data Fiduciary",
+    "predicate": "mustAppoint",
+    "object": "Data Protection Officer",
+    "deontic": "obligation",
+    "section": "Section 10(2)(a)",
+    "condition": "DPO must be based in India",
+    "consequence": "Penalty"
+  },
+  {
+    "subject": "Significant Data Fiduciary",
+    "predicate": "mustConduct",
+    "object": "Data Audit",
+    "deontic": "obligation",
+    "section": "Section 10(2)(c)",
+    "condition": "periodically as prescribed",
+    "consequence": "Penalty"
+  },
+  {
+    "subject": "Significant Data Fiduciary",
+    "predicate": "mustConduct",
+    "object": "Data Protection Impact Assessment",
+    "deontic": "obligation",
+    "section": "Section 10(2)(b)",
+    "condition": "before processing that poses high risk to Data Principals",
+    "consequence": "Penalty"
+  },
+  {
+    "subject": "Significant Data Fiduciary",
+    "predicate": "mustEnsure",
+    "object": "Algorithmic Accountability",
+    "deontic": "obligation",
+    "section": "Section 10",
+    "condition": "for profiling systems affecting Data Principals",
+    "consequence": "Penalty"
+  },
+  {
+    "subject": "Data Principal",
+    "predicate": "hasRightTo",
+    "object": "Access Personal Data",
+    "deontic": "entitlement",
+    "section": "Section 11",
+    "condition": "upon request to Data Fiduciary",
+    "consequence": "N/A - right of Data Principal"
+  },
+  {
+    "subject": "Data Principal",
+    "predicate": "hasRightTo",
+    "object": "Correction",
+    "deontic": "entitlement",
+    "section": "Section 12(a)",
+    "condition": "for inaccurate or misleading personal data",
+    "consequence": "N/A - right of Data Principal"
+  },
+  {
+    "subject": "Data Principal",
+    "predicate": "hasRightTo",
+    "object": "Erasure",
+    "deontic": "entitlement",
+    "section": "Section 12(b)",
+    "condition": "when purpose is fulfilled or consent withdrawn",
+    "consequence": "N/A - right of Data Principal"
+  },
+  {
+    "subject": "Data Principal",
+    "predicate": "hasRightTo",
+    "object": "Grievance Redressal",
+    "deontic": "entitlement",
+    "section": "Section 13",
+    "condition": "against any action of Data Fiduciary",
+    "consequence": "N/A - right of Data Principal"
+  },
+  {
+    "subject": "Data Principal",
+    "predicate": "hasRightTo",
+    "object": "Withdraw Consent",
+    "deontic": "entitlement",
+    "section": "Section 6(4)",
+    "condition": "at any time; withdrawal does not affect prior processing",
+    "consequence": "N/A - right of Data Principal"
+  },
+  {
+    "subject": "Data Principal",
+    "predicate": "hasRightTo",
+    "object": "Nominate Representative",
+    "deontic": "entitlement",
+    "section": "Section 14",
+    "condition": "in case of death or incapacity",
+    "consequence": "N/A - right of Data Principal"
+  },
+  {
+    "subject": "Data Principal",
+    "predicate": "mustNot",
+    "object": "Impersonate Another Person",
+    "deontic": "prohibition",
+    "section": "Section 15",
+    "condition": "when providing personal data",
+    "consequence": "Penalty on Data Principal"
+  },
+  {
+    "subject": "Consent",
+    "predicate": "mustBe",
+    "object": "Free",
+    "deontic": "obligation",
+    "section": "Section 6(1)",
+    "condition": "not obtained under coercion or undue influence",
+    "consequence": "Consent void if not free"
+  },
+  {
+    "subject": "Consent",
+    "predicate": "mustBe",
+    "object": "Specific",
+    "deontic": "obligation",
+    "section": "Section 6(1)",
+    "condition": "for identified purposes only",
+    "consequence": "Consent void if not specific"
+  },
+  {
+    "subject": "Consent",
+    "predicate": "mustBe",
+    "object": "Informed",
+    "deontic": "obligation",
+    "section": "Section 6(1)",
+    "condition": "Data Principal must receive notice before consenting",
+    "consequence": "Consent void if not informed"
+  },
+  {
+    "subject": "Consent",
+    "predicate": "mustBe",
+    "object": "Unconditional",
+    "deontic": "obligation",
+    "section": "Section 6(1)",
+    "condition": "not bundled with other consents",
+    "consequence": "Consent void"
+  },
+  {
+    "subject": "Consent",
+    "predicate": "mustBe",
+    "object": "Unambiguous",
+    "deontic": "obligation",
+    "section": "Section 6(1)",
+    "condition": "given through a clear affirmative action",
+    "consequence": "Consent void if ambiguous"
+  },
+  {
+    "subject": "Consent",
+    "predicate": "mustBe",
+    "object": "Revocable",
+    "deontic": "obligation",
+    "section": "Section 6(4)",
+    "condition": "at any time without penalty",
+    "consequence": "Non-revocable consent is invalid"
+  },
+  {
+    "subject": "Notice",
+    "predicate": "mustDescribe",
+    "object": "Purpose of Processing",
+    "deontic": "obligation",
+    "section": "Section 5(1)(a)",
+    "condition": "in clear and plain language",
+    "consequence": "Penalty"
+  },
+  {
+    "subject": "Notice",
+    "predicate": "mustDescribe",
+    "object": "Personal Data Collected",
+    "deontic": "obligation",
+    "section": "Section 5(1)(b)",
+    "condition": "specific categories of data to be collected",
+    "consequence": "Penalty"
+  },
+  {
+    "subject": "Notice",
+    "predicate": "mustDescribe",
+    "object": "Data Principal Rights",
+    "deontic": "obligation",
+    "section": "Section 5(1)(c)",
+    "condition": "how to exercise rights",
+    "consequence": "Penalty"
+  },
+  {
+    "subject": "Notice",
+    "predicate": "mustDescribe",
+    "object": "Grievance Officer Contact",
+    "deontic": "obligation",
+    "section": "Section 5(1)(d)",
+    "condition": "contact details of the grievance officer",
+    "consequence": "Penalty"
+  },
+  {
+    "subject": "Notice",
+    "predicate": "mustBe",
+    "object": "In English or Regional Language",
+    "deontic": "obligation",
+    "section": "Section 5",
+    "condition": "in a language the Data Principal understands",
+    "consequence": "Penalty"
+  },
+  {
+    "subject": "Data Protection Board",
+    "predicate": "handles",
+    "object": "Complaint",
+    "deontic": "permission",
+    "section": "Section 27",
+    "condition": "after exhausting Data Fiduciary grievance redressal",
+    "consequence": "N/A"
+  },
+  {
+    "subject": "Data Protection Board",
+    "predicate": "handles",
+    "object": "Appeal",
+    "deontic": "permission",
+    "section": "Section 29",
+    "condition": "against any order of the Board",
+    "consequence": "N/A"
+  },
+  {
+    "subject": "Data Protection Board",
+    "predicate": "imposes",
+    "object": "Financial Penalty",
+    "deontic": "permission",
+    "section": "Section 33",
+    "condition": "after due inquiry and opportunity to be heard",
+    "consequence": "N/A"
+  },
+  {
+    "subject": "Data Protection Board",
+    "predicate": "mustPass",
+    "object": "Reasoned Order",
+    "deontic": "obligation",
+    "section": "Section 28",
+    "condition": "for every adjudication",
+    "consequence": "Appealable if not reasoned"
+  },
+  {
+    "subject": "Data Breach",
+    "predicate": "requires",
+    "object": "Board Notification",
+    "deontic": "obligation",
+    "section": "Section 8(6)(a)",
+    "condition": "without undue delay",
+    "consequence": "Penalty up to INR 250 crore"
+  },
+  {
+    "subject": "Data Breach",
+    "predicate": "requires",
+    "object": "Affected Principal Notification",
+    "deontic": "obligation",
+    "section": "Section 8(6)(b)",
+    "condition": "each affected Data Principal must be notified",
+    "consequence": "Penalty up to INR 250 crore"
+  },
+  {
+    "subject": "Data Breach",
+    "predicate": "mustDescribe",
+    "object": "Nature of Breach",
+    "deontic": "obligation",
+    "section": "Section 8(6)",
+    "condition": "in the notification to Board and Principal",
+    "consequence": "Penalty"
+  },
+  {
+    "subject": "Purpose Limitation",
+    "predicate": "prohibits",
+    "object": "Processing Beyond Consent",
+    "deontic": "prohibition",
+    "section": "Section 4(1)(b)",
+    "condition": "without obtaining fresh consent",
+    "consequence": "Penalty up to INR 250 crore"
+  },
+  {
+    "subject": "Storage Limitation",
+    "predicate": "prohibits",
+    "object": "Retention After Purpose",
+    "deontic": "prohibition",
+    "section": "Section 8(7)",
+    "condition": "data must be erased after purpose completion",
+    "consequence": "Penalty"
+  },
+  {
+    "subject": "Data Minimization",
+    "predicate": "prohibits",
+    "object": "Excess Collection",
+    "deontic": "prohibition",
+    "section": "Section 4",
+    "condition": "only data necessary for stated purpose may be collected",
+    "consequence": "Penalty"
+  },
+  {
+    "subject": "Cross Border Transfer",
+    "predicate": "permittedTo",
+    "object": "Whitelisted Countries",
+    "deontic": "permission",
+    "section": "Section 16",
+    "condition": "countries notified by Central Government",
+    "consequence": "N/A"
+  },
+  {
+    "subject": "Cross Border Transfer",
+    "predicate": "prohibitedTo",
+    "object": "Blacklisted Countries",
+    "deontic": "prohibition",
+    "section": "Section 16",
+    "condition": "countries restricted by Central Government notification",
+    "consequence": "Penalty"
+  },
+  {
+    "subject": "Sensitive Personal Data",
+    "predicate": "requires",
+    "object": "Enhanced Consent",
+    "deontic": "obligation",
+    "section": "Section 9",
+    "condition": "including health, financial, biometric, sexual orientation data",
+    "consequence": "Penalty up to INR 250 crore"
+  },
+  {
+    "subject": "Sensitive Personal Data",
+    "predicate": "mustNotBeProcessed",
+    "object": "Without Explicit Consent",
+    "deontic": "prohibition",
+    "section": "Section 9",
+    "condition": "explicit written consent required",
+    "consequence": "Penalty up to INR 250 crore"
+  },
+  {
+    "subject": "Children Data",
+    "predicate": "requires",
+    "object": "Verifiable Parental Consent",
+    "deontic": "obligation",
+    "section": "Section 9(1)",
+    "condition": "child means person under 18 years",
+    "consequence": "Penalty up to INR 200 crore"
+  },
+  {
+    "subject": "Children Data",
+    "predicate": "prohibits",
+    "object": "Behavioural Tracking",
+    "deontic": "prohibition",
+    "section": "Section 9(3)(b)",
+    "condition": "no tracking or monitoring of children's behaviour",
+    "consequence": "Penalty up to INR 200 crore"
+  },
+  {
+    "subject": "Children Data",
+    "predicate": "prohibits",
+    "object": "Targeted Advertising to Children",
+    "deontic": "prohibition",
+    "section": "Section 9(3)(c)",
+    "condition": "no targeted advertising directed at children",
+    "consequence": "Penalty up to INR 200 crore"
+  },
+  {
+    "subject": "Consent Manager",
+    "predicate": "mustRegisterWith",
+    "object": "Data Protection Board",
+    "deontic": "obligation",
+    "section": "Section 6(7)",
+    "condition": "before operating as Consent Manager",
+    "consequence": "Registration required"
+  },
+  {
+    "subject": "Consent Manager",
+    "predicate": "mustEnable",
+    "object": "Consent Withdrawal",
+    "deontic": "obligation",
+    "section": "Section 6(7)",
+    "condition": "through accessible and transparent platform",
+    "consequence": "Deregistration"
+  },
+  {
+    "subject": "Third Party Sharing",
+    "predicate": "requires",
+    "object": "Contractual Safeguards",
+    "deontic": "obligation",
+    "section": "Section 8(2)",
+    "condition": "Data Fiduciary must ensure processor complies with Act",
+    "consequence": "Penalty on Data Fiduciary"
+  },
+  {
+    "subject": "Third Party Sharing",
+    "predicate": "requires",
+    "object": "Purpose-Limited Agreement",
+    "deontic": "obligation",
+    "section": "Section 8",
+    "condition": "processor can only act on Data Fiduciary instructions",
+    "consequence": "Penalty"
+  },
+  {
+    "subject": "Automated Decision Making",
+    "predicate": "mustEnsure",
+    "object": "Human Review Availability",
+    "deontic": "obligation",
+    "section": "Section 12",
+    "condition": "for decisions with significant impact on Data Principal",
+    "consequence": "Penalty"
+  },
+  {
+    "subject": "Automated Decision Making",
+    "predicate": "mustEnsure",
+    "object": "Non-Discrimination",
+    "deontic": "obligation",
+    "section": "Section 9",
+    "condition": "no discriminatory profiling based on protected attributes",
+    "consequence": "Penalty"
+  },
+  {
+    "subject": "Grievance Redressal",
+    "predicate": "mustBeResolved",
+    "object": "Within Prescribed Period",
+    "deontic": "obligation",
+    "section": "Section 13",
+    "condition": "as prescribed by the Board",
+    "consequence": "Data Principal may approach Board"
+  },
+  {
+    "subject": "Grievance Redressal",
+    "predicate": "mustHave",
+    "object": "Designated Officer",
+    "deontic": "obligation",
+    "section": "Section 13",
+    "condition": "contact details published in notice and website",
+    "consequence": "Penalty"
+  },
+  {
+    "subject": "Security Safeguards",
+    "predicate": "mustInclude",
+    "object": "Encryption",
+    "deontic": "obligation",
+    "section": "Section 8(5)",
+    "condition": "for personal data at rest and in transit",
+    "consequence": "Penalty up to INR 250 crore"
+  },
+  {
+    "subject": "Security Safeguards",
+    "predicate": "mustInclude",
+    "object": "Access Controls",
+    "deontic": "obligation",
+    "section": "Section 8(5)",
+    "condition": "to prevent unauthorised access",
+    "consequence": "Penalty up to INR 250 crore"
+  },
+  {
+    "subject": "Lawful Processing",
+    "predicate": "permittedWithout",
+    "object": "Consent for State Functions",
+    "deontic": "permission",
+    "section": "Section 7(b)",
+    "condition": "State processing for subsidies, benefits, and services",
+    "consequence": "N/A - exemption"
+  },
+  {
+    "subject": "Lawful Processing",
+    "predicate": "permittedWithout",
+    "object": "Consent for Medical Emergency",
+    "deontic": "permission",
+    "section": "Section 7(c)",
+    "condition": "threat to life or health of individual or others",
+    "consequence": "N/A - exemption"
+  },
+  {
+    "subject": "Lawful Processing",
+    "predicate": "permittedWithout",
+    "object": "Consent for Employment",
+    "deontic": "permission",
+    "section": "Section 7(d)",
+    "condition": "for employment-related purposes",
+    "consequence": "N/A - exemption"
+  },
+  {
+    "subject": "Exemption",
+    "predicate": "permittedFor",
+    "object": "National Security Processing",
+    "deontic": "permission",
+    "section": "Section 17",
+    "condition": "Central Government may exempt instrumentalities of State",
+    "consequence": "N/A - state exemption"
+  },
+  {
+    "subject": "Exemption",
+    "predicate": "permittedFor",
+    "object": "Research and Archiving",
+    "deontic": "permission",
+    "section": "Section 17(2)",
+    "condition": "with appropriate safeguards as prescribed",
+    "consequence": "N/A - exemption"
+  }
+]

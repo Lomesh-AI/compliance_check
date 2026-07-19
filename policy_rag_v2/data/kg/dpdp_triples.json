@@ -1,0 +1,67 @@
+[
+  {"subject":"Data Fiduciary","predicate":"mustProvide","object":"Notice"},
+  {"subject":"Data Fiduciary","predicate":"mustObtain","object":"Consent"},
+  {"subject":"Data Fiduciary","predicate":"mustEnsure","object":"Data Accuracy"},
+  {"subject":"Data Fiduciary","predicate":"mustImplement","object":"Security Safeguards"},
+  {"subject":"Data Fiduciary","predicate":"mustProvide","object":"Grievance Redressal"},
+  {"subject":"Data Fiduciary","predicate":"mustNotify","object":"Data Breach"},
+  {"subject":"Data Fiduciary","predicate":"mustMaintain","object":"Compliance Records"},
+  {"subject":"Data Fiduciary","predicate":"subjectTo","object":"Penalty"},
+
+  {"subject":"Significant Data Fiduciary","predicate":"mustAppoint","object":"Data Protection Officer"},
+  {"subject":"Significant Data Fiduciary","predicate":"mustConduct","object":"Data Audit"},
+  {"subject":"Significant Data Fiduciary","predicate":"mustConduct","object":"Risk Assessment"},
+  {"subject":"Significant Data Fiduciary","predicate":"mustEnsure","object":"Compliance"},
+  {"subject":"Significant Data Fiduciary","predicate":"subjectTo","object":"Additional Obligations"},
+
+  {"subject":"Data Principal","predicate":"hasRightTo","object":"Access"},
+  {"subject":"Data Principal","predicate":"hasRightTo","object":"Correction"},
+  {"subject":"Data Principal","predicate":"hasRightTo","object":"Erasure"},
+  {"subject":"Data Principal","predicate":"hasRightTo","object":"Grievance Redressal"},
+  {"subject":"Data Principal","predicate":"hasRightTo","object":"Withdraw Consent"},
+  {"subject":"Data Principal","predicate":"hasRightTo","object":"Nominee"},
+
+  {"subject":"Consent","predicate":"mustBe","object":"Free"},
+  {"subject":"Consent","predicate":"mustBe","object":"Specific"},
+  {"subject":"Consent","predicate":"mustBe","object":"Informed"},
+  {"subject":"Consent","predicate":"mustBe","object":"Unambiguous"},
+  {"subject":"Consent","predicate":"mustBe","object":"Revocable"},
+
+  {"subject":"Notice","predicate":"mustDescribe","object":"Purpose"},
+  {"subject":"Notice","predicate":"mustDescribe","object":"Rights"},
+  {"subject":"Notice","predicate":"mustDescribe","object":"Contact Information"},
+
+  {"subject":"Data Protection Board","predicate":"handles","object":"Grievance"},
+  {"subject":"Data Protection Board","predicate":"handles","object":"Complaint"},
+  {"subject":"Data Protection Board","predicate":"handles","object":"Appeal"},
+  {"subject":"Data Protection Board","predicate":"issues","object":"Directions"},
+  {"subject":"Data Protection Board","predicate":"imposes","object":"Penalty"},
+
+  {"subject":"Data Breach","predicate":"requires","object":"Notification"},
+  {"subject":"Data Breach","predicate":"mayCause","object":"Harm"},
+
+  {"subject":"Purpose Limitation","predicate":"appliesTo","object":"Processing"},
+  {"subject":"Storage Limitation","predicate":"appliesTo","object":"Retention"},
+  {"subject":"Data Minimization","predicate":"appliesTo","object":"Collection"},
+
+  {"subject":"Personal Data","predicate":"mustBeProcessedFor","object":"Lawful Purpose"},
+  {"subject":"Personal Data","predicate":"mustBeDeletedAfter","object":"Purpose Completion"},
+
+  {"subject":"Cross Border Transfer","predicate":"subjectTo","object":"Government Restrictions"},
+  {"subject":"Sensitive Personal Data","predicate":"requires","object":"Enhanced Protection"},
+
+  {"subject":"Children Data","predicate":"requires","object":"Parental Consent"},
+  {"subject":"Children Data","predicate":"requires","object":"Age Verification"},
+
+  {"subject":"Complaint","predicate":"mayBeFiledWith","object":"Data Protection Board"},
+  {"subject":"Appeal","predicate":"mayBeFiledAgainst","object":"Board Decision"},
+
+  {"subject":"Consent Manager","predicate":"assists","object":"Data Principal"},
+  {"subject":"Consent Manager","predicate":"manages","object":"Consent"},
+
+  {"subject":"Third Party Sharing","predicate":"requires","object":"Notice"},
+  {"subject":"Third Party Sharing","predicate":"requires","object":"Consent"},
+
+  {"subject":"Automated Decision Making","predicate":"mustEnsure","object":"Transparency"},
+  {"subject":"Automated Decision Making","predicate":"mustEnsure","object":"Fairness"}
+]

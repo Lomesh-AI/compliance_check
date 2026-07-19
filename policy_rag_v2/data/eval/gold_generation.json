@@ -1,0 +1,167 @@
+[
+  {
+    "query": "What is the right of a Data Principal to withdraw consent?",
+    "gold_answer": "A Data Principal has the right to withdraw consent given to a Data Fiduciary at any time. Upon withdrawal, the Data Fiduciary must cease processing within a reasonable timeframe. Withdrawal does not affect the lawfulness of prior processing.",
+    "gold_chunk_ids": [
+      16,
+      28,
+      15
+    ],
+    "section_reference": "Section 6(4), DPDP Act 2023",
+    "manual_verified": false
+  },
+  {
+    "query": "What notice must a Data Fiduciary give before collecting data?",
+    "gold_answer": "Before or at the time of collecting data the Data Fiduciary must provide notice in clear and plain language describing: the personal data to be collected, the purpose, how to exercise rights, and how to contact the grievance officer and approach the Data Protection Board.",
+    "gold_chunk_ids": [
+      25,
+      24,
+      10
+    ],
+    "section_reference": "Section 5, DPDP Act 2023",
+    "manual_verified": false
+  },
+  {
+    "query": "What are a Significant Data Fiduciary's extra obligations?",
+    "gold_answer": "A Significant Data Fiduciary must appoint a Data Protection Officer resident in India, conduct Data Protection Impact Assessments, perform periodic data audits, and comply with additional obligations prescribed by the Central Government.",
+    "gold_chunk_ids": [
+      32,
+      31,
+      25
+    ],
+    "section_reference": "Section 10, DPDP Act 2023",
+    "manual_verified": false
+  },
+  {
+    "query": "What information can a Data Principal access about their data?",
+    "gold_answer": "A Data Principal has the right to obtain confirmation of processing, a summary of data processed, the identities of all other Data Fiduciaries who received the data, and any other information prescribed by the Board.",
+    "gold_chunk_ids": [
+      38,
+      28,
+      3
+    ],
+    "section_reference": "Section 11, DPDP Act 2023",
+    "manual_verified": false
+  },
+  {
+    "query": "When can personal data be processed without consent?",
+    "gold_answer": "Personal data may be processed without consent for: State functions providing subsidies and services; medical emergencies; employment purposes; compliance with law; national security; prevention of offences; and research with prescribed safeguards.",
+    "gold_chunk_ids": [
+      21,
+      74,
+      40
+    ],
+    "section_reference": "Section 7, DPDP Act 2023",
+    "manual_verified": false
+  },
+  {
+    "query": "What restrictions apply to processing children's personal data?",
+    "gold_answer": "Data Fiduciaries must obtain verifiable parental consent, must not track children's behaviour, must not target advertising at children, and must not process data in a manner detrimental to children's wellbeing. A child is a person under 18 years.",
+    "gold_chunk_ids": [
+      30,
+      29,
+      28
+    ],
+    "section_reference": "Section 9, DPDP Act 2023",
+    "manual_verified": false
+  },
+  {
+    "query": "What penalty applies for failure to notify a data breach?",
+    "gold_answer": "Failure to notify the Data Protection Board or affected Data Principals of a personal data breach may attract a financial penalty of up to two hundred and fifty crore rupees as specified in the Schedule to the DPDP Act 2023.",
+    "gold_chunk_ids": [
+      68,
+      82,
+      55
+    ],
+    "section_reference": "Schedule Item 2, DPDP Act 2023",
+    "manual_verified": false
+  },
+  {
+    "query": "How can the State be exempted from DPDP Act provisions?",
+    "gold_answer": "The Central Government may exempt any instrumentality of the State from provisions of the Act in the interest of sovereignty, national security, friendly relations with foreign states, or maintenance of public order.",
+    "gold_chunk_ids": [
+      43,
+      70,
+      72
+    ],
+    "section_reference": "Section 17, DPDP Act 2023",
+    "manual_verified": false
+  },
+  {
+    "query": "What are the conditions for valid consent under DPDP Act?",
+    "gold_answer": "Consent must be free, specific, informed, unconditional, and unambiguous. It must be given through a clear affirmative action. It must be separate from other consent. Pre-ticked boxes, silence, and bundled consent are not valid.",
+    "gold_chunk_ids": [
+      12,
+      14,
+      13
+    ],
+    "section_reference": "Section 6(1), DPDP Act 2023",
+    "manual_verified": false
+  },
+  {
+    "query": "What are the data accuracy obligations of a Data Fiduciary?",
+    "gold_answer": "Data Fiduciaries must make reasonable efforts to ensure that personal data is complete, accurate, and consistent, especially when used for decisions affecting the Data Principal or when likely to be disclosed to other Data Fiduciaries.",
+    "gold_chunk_ids": [
+      25,
+      24,
+      35
+    ],
+    "section_reference": "Section 8(3), DPDP Act 2023",
+    "manual_verified": false
+  },
+  {
+    "query": "What security measures must Data Fiduciaries implement?",
+    "gold_answer": "Data Fiduciaries must implement appropriate security safeguards to protect personal data from breach. This includes encryption at rest and in transit, access controls, and regular audits. Failure may attract a penalty of up to INR 250 crore.",
+    "gold_chunk_ids": [
+      25,
+      82,
+      24
+    ],
+    "section_reference": "Section 8(5), DPDP Act 2023",
+    "manual_verified": false
+  },
+  {
+    "query": "What are the Data Principal's duties under the DPDP Act?",
+    "gold_answer": "A Data Principal must not impersonate another person when providing data, must not suppress material information, and must not register false or frivolous grievances. Violations may attract penalties on the Data Principal.",
+    "gold_chunk_ids": [
+      38,
+      28,
+      36
+    ],
+    "section_reference": "Section 15, DPDP Act 2023",
+    "manual_verified": false
+  },
+  {
+    "query": "What is the right to grievance redressal for a Data Principal?",
+    "gold_answer": "A Data Principal can file a complaint with the Data Fiduciary's grievance officer. If unsatisfied, they can approach the Data Protection Board. The Board will inquire and may impose penalties or direct remedial action.",
+    "gold_chunk_ids": [
+      36,
+      37,
+      28
+    ],
+    "section_reference": "Section 13, DPDP Act 2023",
+    "manual_verified": false
+  },
+  {
+    "query": "Can a Data Principal nominate someone to exercise rights?",
+    "gold_answer": "Yes. A Data Principal can nominate another person to exercise their rights in the event of death or incapacity. The nominee must provide prescribed proof of their status before the Data Fiduciary can act on their instructions.",
+    "gold_chunk_ids": [
+      37,
+      28,
+      38
+    ],
+    "section_reference": "Section 14, DPDP Act 2023",
+    "manual_verified": false
+  },
+  {
+    "query": "What must a Data Fiduciary do when processing is no longer needed?",
+    "gold_answer": "A Data Fiduciary must erase personal data and cause the Data Processor to erase it within the period specified by the Board once the purpose of processing is fulfilled or consent is withdrawn. Retention beyond this point is prohibited.",
+    "gold_chunk_ids": [
+      25,
+      16,
+      27
+    ],
+    "section_reference": "Section 8(7), DPDP Act 2023",
+    "manual_verified": false
+  }
+]

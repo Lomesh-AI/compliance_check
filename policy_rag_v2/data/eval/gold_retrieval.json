@@ -1,0 +1,502 @@
+[
+  {
+    "query": "What are the requirements for valid consent under DPDP Act?",
+    "relevant_chunk_ids": [
+      12,
+      14,
+      13
+    ],
+    "manual_verified": false,
+    "manual_verification_needed": true
+  },
+  {
+    "query": "How can a Data Principal withdraw consent?",
+    "relevant_chunk_ids": [
+      16,
+      15,
+      11
+    ],
+    "manual_verified": false,
+    "manual_verification_needed": true
+  },
+  {
+    "query": "What is a Consent Manager and what is its role?",
+    "relevant_chunk_ids": [
+      18,
+      3,
+      56
+    ],
+    "manual_verified": false,
+    "manual_verification_needed": true
+  },
+  {
+    "query": "Can consent be bundled with other consent or terms of service?",
+    "relevant_chunk_ids": [
+      13,
+      18,
+      33
+    ],
+    "manual_verified": false,
+    "manual_verification_needed": true
+  },
+  {
+    "query": "What happens to processing if a Data Principal withdraws consent?",
+    "relevant_chunk_ids": [
+      16,
+      11,
+      25
+    ],
+    "manual_verified": false,
+    "manual_verification_needed": true
+  },
+  {
+    "query": "Must consent be in writing under the DPDP Act?",
+    "relevant_chunk_ids": [
+      18,
+      12,
+      13
+    ],
+    "manual_verified": false,
+    "manual_verification_needed": true
+  },
+  {
+    "query": "What language must consent notices be given in?",
+    "relevant_chunk_ids": [
+      12,
+      14,
+      73
+    ],
+    "manual_verified": false,
+    "manual_verification_needed": true
+  },
+  {
+    "query": "Can a Data Fiduciary process data beyond the consented purpose?",
+    "relevant_chunk_ids": [
+      11,
+      18,
+      29
+    ],
+    "manual_verified": false,
+    "manual_verification_needed": true
+  },
+  {
+    "query": "What must a notice contain before collecting personal data?",
+    "relevant_chunk_ids": [
+      25,
+      10,
+      24
+    ],
+    "manual_verified": false,
+    "manual_verification_needed": true
+  },
+  {
+    "query": "Who can give consent on behalf of a child?",
+    "relevant_chunk_ids": [
+      29,
+      28,
+      30
+    ],
+    "manual_verified": false,
+    "manual_verification_needed": true
+  },
+  {
+    "query": "What security safeguards must a Data Fiduciary implement?",
+    "relevant_chunk_ids": [
+      25,
+      24,
+      32
+    ],
+    "manual_verified": false,
+    "manual_verification_needed": true
+  },
+  {
+    "query": "What must a Data Fiduciary do when it no longer needs personal data?",
+    "relevant_chunk_ids": [
+      16,
+      35,
+      36
+    ],
+    "manual_verified": false,
+    "manual_verification_needed": true
+  },
+  {
+    "query": "What are the obligations of a Data Fiduciary regarding data accuracy?",
+    "relevant_chunk_ids": [
+      25,
+      24,
+      35
+    ],
+    "manual_verified": false,
+    "manual_verification_needed": true
+  },
+  {
+    "query": "Must a Data Fiduciary appoint a grievance officer?",
+    "relevant_chunk_ids": [
+      37,
+      36,
+      28
+    ],
+    "manual_verified": false,
+    "manual_verification_needed": true
+  },
+  {
+    "query": "What are the additional obligations of a Significant Data Fiduciary?",
+    "relevant_chunk_ids": [
+      32,
+      31,
+      25
+    ],
+    "manual_verified": false,
+    "manual_verification_needed": true
+  },
+  {
+    "query": "How is a Significant Data Fiduciary designated?",
+    "relevant_chunk_ids": [
+      30,
+      31,
+      25
+    ],
+    "manual_verified": false,
+    "manual_verification_needed": true
+  },
+  {
+    "query": "Can a Data Fiduciary appoint a Data Processor?",
+    "relevant_chunk_ids": [
+      24,
+      25,
+      28
+    ],
+    "manual_verified": false,
+    "manual_verification_needed": true
+  },
+  {
+    "query": "What records must a Data Fiduciary maintain?",
+    "relevant_chunk_ids": [
+      25,
+      27,
+      24
+    ],
+    "manual_verified": false,
+    "manual_verification_needed": true
+  },
+  {
+    "query": "Can a Data Fiduciary transfer personal data outside India?",
+    "relevant_chunk_ids": [
+      39,
+      30,
+      43
+    ],
+    "manual_verified": false,
+    "manual_verification_needed": true
+  },
+  {
+    "query": "What is purpose limitation under DPDP Act?",
+    "relevant_chunk_ids": [
+      9,
+      8,
+      16
+    ],
+    "manual_verified": false,
+    "manual_verification_needed": true
+  },
+  {
+    "query": "What is the right to access personal data under DPDP Act?",
+    "relevant_chunk_ids": [
+      3,
+      38,
+      28
+    ],
+    "manual_verified": false,
+    "manual_verification_needed": true
+  },
+  {
+    "query": "How can a Data Principal correct inaccurate personal data?",
+    "relevant_chunk_ids": [
+      35,
+      36,
+      24
+    ],
+    "manual_verified": false,
+    "manual_verification_needed": true
+  },
+  {
+    "query": "What is the right to erasure of personal data?",
+    "relevant_chunk_ids": [
+      36,
+      35,
+      16
+    ],
+    "manual_verified": false,
+    "manual_verification_needed": true
+  },
+  {
+    "query": "Can a Data Principal nominate someone to exercise their rights?",
+    "relevant_chunk_ids": [
+      37,
+      38,
+      28
+    ],
+    "manual_verified": false,
+    "manual_verification_needed": true
+  },
+  {
+    "query": "What are the duties of a Data Principal?",
+    "relevant_chunk_ids": [
+      38,
+      28,
+      18
+    ],
+    "manual_verified": false,
+    "manual_verification_needed": true
+  },
+  {
+    "query": "How can a Data Principal approach the Data Protection Board?",
+    "relevant_chunk_ids": [
+      37,
+      36,
+      28
+    ],
+    "manual_verified": false,
+    "manual_verification_needed": true
+  },
+  {
+    "query": "What right does a Data Principal have regarding automated decisions?",
+    "relevant_chunk_ids": [
+      3,
+      28,
+      36
+    ],
+    "manual_verified": false,
+    "manual_verification_needed": true
+  },
+  {
+    "query": "Can a Data Principal object to processing of their personal data?",
+    "relevant_chunk_ids": [
+      16,
+      28,
+      18
+    ],
+    "manual_verified": false,
+    "manual_verification_needed": true
+  },
+  {
+    "query": "What information must a Data Fiduciary provide when a Data Principal requests access?",
+    "relevant_chunk_ids": [
+      24,
+      25,
+      10
+    ],
+    "manual_verified": false,
+    "manual_verification_needed": true
+  },
+  {
+    "query": "Can a Data Principal request deletion of data that is required by law?",
+    "relevant_chunk_ids": [
+      36,
+      35,
+      27
+    ],
+    "manual_verified": false,
+    "manual_verification_needed": true
+  },
+  {
+    "query": "What must a Data Fiduciary do in case of a personal data breach?",
+    "relevant_chunk_ids": [
+      25,
+      24,
+      30
+    ],
+    "manual_verified": false,
+    "manual_verification_needed": true
+  },
+  {
+    "query": "What are the penalties for failing to notify a data breach?",
+    "relevant_chunk_ids": [
+      68,
+      82,
+      55
+    ],
+    "manual_verified": false,
+    "manual_verification_needed": true
+  },
+  {
+    "query": "What is the maximum penalty under the DPDP Act?",
+    "relevant_chunk_ids": [
+      68,
+      83,
+      82
+    ],
+    "manual_verified": false,
+    "manual_verification_needed": true
+  },
+  {
+    "query": "What factors does the Board consider when imposing a penalty?",
+    "relevant_chunk_ids": [
+      55,
+      56,
+      68
+    ],
+    "manual_verified": false,
+    "manual_verification_needed": true
+  },
+  {
+    "query": "Can a Data Fiduciary appeal a Board penalty?",
+    "relevant_chunk_ids": [
+      61,
+      62,
+      14
+    ],
+    "manual_verified": false,
+    "manual_verification_needed": true
+  },
+  {
+    "query": "What penalty applies for processing children's data without consent?",
+    "relevant_chunk_ids": [
+      30,
+      16,
+      35
+    ],
+    "manual_verified": false,
+    "manual_verification_needed": true
+  },
+  {
+    "query": "Can individuals be penalised under the DPDP Act?",
+    "relevant_chunk_ids": [
+      25,
+      24,
+      32
+    ],
+    "manual_verified": false,
+    "manual_verification_needed": true
+  },
+  {
+    "query": "What are the penalties for non-compliance with security safeguards?",
+    "relevant_chunk_ids": [
+      82,
+      68,
+      55
+    ],
+    "manual_verified": false,
+    "manual_verification_needed": true
+  },
+  {
+    "query": "Is there a penalty for not providing a grievance mechanism?",
+    "relevant_chunk_ids": [
+      37,
+      28,
+      38
+    ],
+    "manual_verified": false,
+    "manual_verification_needed": true
+  },
+  {
+    "query": "What is the role of the Data Protection Board in adjudication?",
+    "relevant_chunk_ids": [
+      46,
+      38,
+      55
+    ],
+    "manual_verified": false,
+    "manual_verification_needed": true
+  },
+  {
+    "query": "What additional protections apply to sensitive personal data?",
+    "relevant_chunk_ids": [
+      18,
+      11,
+      24
+    ],
+    "manual_verified": false,
+    "manual_verification_needed": true
+  },
+  {
+    "query": "What restrictions exist on processing children's data?",
+    "relevant_chunk_ids": [
+      29,
+      30,
+      28
+    ],
+    "manual_verified": false,
+    "manual_verification_needed": true
+  },
+  {
+    "query": "Are there exemptions to consent requirements under DPDP Act?",
+    "relevant_chunk_ids": [
+      13,
+      12,
+      18
+    ],
+    "manual_verified": false,
+    "manual_verification_needed": true
+  },
+  {
+    "query": "Can the government exempt itself from DPDP Act obligations?",
+    "relevant_chunk_ids": [
+      43,
+      7,
+      70
+    ],
+    "manual_verified": false,
+    "manual_verification_needed": true
+  },
+  {
+    "query": "What is the treatment of personal data for research purposes?",
+    "relevant_chunk_ids": [
+      44,
+      43,
+      30
+    ],
+    "manual_verified": false,
+    "manual_verification_needed": true
+  },
+  {
+    "query": "Does DPDP Act apply to data processed outside India?",
+    "relevant_chunk_ids": [
+      0,
+      7,
+      43
+    ],
+    "manual_verified": false,
+    "manual_verification_needed": true
+  },
+  {
+    "query": "What are the cross-border transfer restrictions under DPDP Act?",
+    "relevant_chunk_ids": [
+      39,
+      30,
+      43
+    ],
+    "manual_verified": false,
+    "manual_verification_needed": true
+  },
+  {
+    "query": "Are media and journalism exempt from DPDP Act?",
+    "relevant_chunk_ids": [
+      43,
+      30,
+      21
+    ],
+    "manual_verified": false,
+    "manual_verification_needed": true
+  },
+  {
+    "query": "What happens to existing data collected before DPDP Act?",
+    "relevant_chunk_ids": [
+      11,
+      35,
+      18
+    ],
+    "manual_verified": false,
+    "manual_verification_needed": true
+  },
+  {
+    "query": "Is anonymised data covered by DPDP Act?",
+    "relevant_chunk_ids": [
+      43,
+      18,
+      34
+    ],
+    "manual_verified": false,
+    "manual_verification_needed": true
+  }
+]

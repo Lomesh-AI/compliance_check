@@ -1,0 +1,62 @@
+[
+  {
+    "rule_subject": "Consent",
+    "test_policy_excerpt": "We collect your information with your permission and you can withdraw this permission at any time by contacting us.",
+    "expected_verdict": "pass",
+    "rationale": "Mentions permission (consent synonym), withdrawal mechanism present."
+  },
+  {
+    "rule_subject": "Consent",
+    "test_policy_excerpt": "By using our services you agree to our privacy policy and data collection practices.",
+    "expected_verdict": "fail",
+    "rationale": "Consent is bundled with terms of service and implied from use — not a clear affirmative action."
+  },
+  {
+    "rule_subject": "Notice",
+    "test_policy_excerpt": "We collect your name, email, and usage data to provide our services and improve your experience.",
+    "expected_verdict": "fail",
+    "rationale": "States purpose and data types but does not mention rights of Data Principal or grievance officer contact."
+  },
+  {
+    "rule_subject": "Notice",
+    "test_policy_excerpt": "We collect your name and email to process your order. You have the right to access, correct, and delete your data. Contact our DPO at dpo@company.com for any grievances or to exercise your rights.",
+    "expected_verdict": "pass",
+    "rationale": "States data collected, purpose, Principal rights, and contact for grievances."
+  },
+  {
+    "rule_subject": "Data Breach",
+    "test_policy_excerpt": "In the event of a security incident we will investigate and take appropriate action to protect your data.",
+    "expected_verdict": "fail",
+    "rationale": "Does not mention notifying affected users or the Data Protection Board."
+  },
+  {
+    "rule_subject": "Data Breach",
+    "test_policy_excerpt": "If a data breach occurs we will notify the Data Protection Board and all affected users without undue delay describing the nature of the breach and steps taken.",
+    "expected_verdict": "pass",
+    "rationale": "Explicitly mentions Board notification, user notification, and description of breach."
+  },
+  {
+    "rule_subject": "Children Data",
+    "test_policy_excerpt": "Our services are available to all users. We do not knowingly collect data from users under 13.",
+    "expected_verdict": "fail",
+    "rationale": "DPDP Act sets age at 18, not 13. No mention of verifiable parental consent."
+  },
+  {
+    "rule_subject": "Children Data",
+    "test_policy_excerpt": "We do not collect personal data from anyone under 18. If you are under 18 your parent or guardian must provide verifiable consent before you use our services.",
+    "expected_verdict": "pass",
+    "rationale": "Correctly identifies 18 as the age threshold and requires verifiable parental consent."
+  },
+  {
+    "rule_subject": "Storage Limitation",
+    "test_policy_excerpt": "We retain your data for as long as necessary for the purposes outlined in this policy.",
+    "expected_verdict": "insufficient_evidence",
+    "rationale": "Vague — does not specify what 'necessary' means or provide a concrete retention schedule."
+  },
+  {
+    "rule_subject": "Storage Limitation",
+    "test_policy_excerpt": "We retain your personal data for 3 years after your last interaction with us. After this period all personal data is securely deleted unless required by law.",
+    "expected_verdict": "pass",
+    "rationale": "States concrete retention period and deletion policy."
+  }
+]
