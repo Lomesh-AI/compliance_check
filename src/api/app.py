@@ -297,7 +297,7 @@ def serve_static(path):
     return "Not found", 404
 
 if __name__ == "__main__":
-    port = int(os.getenv("PORT", 5000))
+    port = int(os.getenv("PORT", 7860))
     debug = os.getenv("FLASK_DEBUG", "false").lower() == "true"
     log.info("Starting PolicyRAG API on http://localhost:%d", port)
     app.run(host="0.0.0.0", port=port, debug=debug)
