@@ -2,6 +2,7 @@ services:
   - type: web
     name: compliance-check
     runtime: docker
+    plan: free
     dockerfilePath: ./Dockerfile
     dockerContext: .
     healthCheckPath: /api/health
