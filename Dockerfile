@@ -15,8 +15,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy the rest of the code
 COPY . .
 
-# Expose the port Hugging Face expects
-EXPOSE 7860
+# Expose the fixed application port
+EXPOSE 8080
 
-# Run the Flask app
-CMD ["python", "src/api/app.py"]
+# Build missing indexes before starting the production WSGI server
+CMD ["python", "scripts/start.py"]

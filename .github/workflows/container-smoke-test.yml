@@ -1,0 +1,122 @@
+name: Container Smoke Test
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  container-smoke-test:
+    runs-on: ubuntu-latest
+    env:
+      HEALTHCHECK_ATTEMPTS: 60
+      HEALTHCHECK_INTERVAL_SECONDS: 10
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      - name: Install Python dependencies
+        run: python -m pip install --requirement requirements.txt
+
+      - name: Run Python syntax checks
+        run: python -m compileall --quiet src scripts
+
+      - name: Run tests when present
+        shell: bash
+        run: |
+          if [[ -d tests ]]; then
+            python -m unittest discover --start-directory tests
+          else
+            echo "No tests directory found; skipping test suite."
+          fi
+
+      - name: Build backend image
+        run: docker build --tag compliance-check-ci .
+
+      - name: Start backend container
+        run: docker run --detach --name compliance-check-ci --publish 8080:8080 compliance-check-ci
+
+      - name: Wait for backend health
+        run: |
+          for attempt in $(seq 1 "$HEALTHCHECK_ATTEMPTS"); do
+            if curl --fail --silent http://127.0.0.1:8080/api/health; then
+              echo
+              exit 0
+            fi
+
+            if ! docker ps --format '{{.Names}}' | grep --quiet '^compliance-check-ci$'; then
+              echo "Backend container exited before becoming healthy."
+              docker logs compliance-check-ci
+              exit 1
+            fi
+
+            sleep "$HEALTHCHECK_INTERVAL_SECONDS"
+          done
+
+          echo "Backend did not become healthy within the configured health-check window."
+          docker logs compliance-check-ci
+          exit 1
+
+      - name: Stop backend container
+        if: always()
+        run: docker rm --force compliance-check-ci
+
+  publish-image:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: container-smoke-test
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract image metadata
+        id: metadata
+        uses: docker/metadata-action@v5
+        with:
+          images: ghcr.io/${{ github.repository }}
+          tags: |
+            type=sha
+            type=raw,value=latest
+
+      - name: Build and push image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.metadata.outputs.tags }}
+          labels: ${{ steps.metadata.outputs.labels }}
+
+  deploy-render:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: publish-image
+    runs-on: ubuntu-latest
+    environment: production
+
+    steps:
+      - name: Trigger Render deployment
+        env:
+          RENDER_DEPLOY_HOOK_URL: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
+        shell: bash
+        run: |
+          if [[ -z "$RENDER_DEPLOY_HOOK_URL" ]]; then
+            echo "RENDER_DEPLOY_HOOK_URL is not configured."
+            exit 1
+          fi
+
+          curl --fail --show-error --silent --request POST "$RENDER_DEPLOY_HOOK_URL"
