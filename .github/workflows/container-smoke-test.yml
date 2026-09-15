@@ -1,0 +1,44 @@
+name: Container Smoke Test
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  container-smoke-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Build backend image
+        run: docker build --tag compliance-check-ci .
+
+      - name: Start backend container
+        run: docker run --detach --name compliance-check-ci --publish 8080:8080 compliance-check-ci
+
+      - name: Wait for backend health
+        run: |
+          for attempt in $(seq 1 60); do
+            if curl --fail --silent http://127.0.0.1:8080/api/health; then
+              echo
+              exit 0
+            fi
+
+            if ! docker ps --format '{{.Names}}' | grep --quiet '^compliance-check-ci$'; then
+              echo "Backend container exited before becoming healthy."
+              docker logs compliance-check-ci
+              exit 1
+            fi
+
+            sleep 10
+          done
+
+          echo "Backend did not become healthy within 10 minutes."
+          docker logs compliance-check-ci
+          exit 1
+
+      - name: Stop backend container
+        if: always()
+        run: docker rm --force compliance-check-ci
