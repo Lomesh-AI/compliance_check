@@ -55,9 +55,10 @@ Sign up at https://console.groq.com
 
 ---
 
-## Step 3 — Build the index
+## Step 3 — Prepare the index
 
-**Must run this before anything else.**
+The API startup script builds the index automatically when either required
+artifact is missing. To build it manually:
 
 ```bash
 python src/ingestion/ingest.py
@@ -161,10 +162,11 @@ Queries and answers are logged to `data/eval/query_log.jsonl` by default.
 ## Step 8 — Run the API server
 
 ```bash
-python src/api/app.py
+python scripts/start.py
 ```
 
-Server starts at http://localhost:5000
+The production server binds to `0.0.0.0:8080` using Gunicorn. It verifies the
+index artifacts before starting.
 
 API endpoints:
 - `GET  /api/health`       — server status
@@ -177,15 +179,15 @@ API endpoints:
 
 ## Step 9 — Open the frontend
 
-With the server running at localhost:5000, open the frontend in your browser:
+With the server running at localhost:8080, open the frontend in your browser:
 
 ```bash
 # Option A: open file directly (works for most browsers)
-open frontend/index.html
+open docs/index.html
 
 # Option B: serve it via Python (avoids any CORS issues)
-python -m http.server 8080 --directory frontend
-# then open http://localhost:8080
+python -m http.server 8081 --directory docs
+# then open http://localhost:8081
 ```
 
 The frontend has three pages:
@@ -212,14 +214,16 @@ See `DATA_SOURCES.md` for a list of recommended additional documents.
 ## Troubleshooting
 
 **`FileNotFoundError: chunks.json not found`**
-→ Run `python src/ingestion/ingest.py` first.
+→ Run `python scripts/start.py`; it builds missing index artifacts before
+starting the server.
 
 **`FAISS DESYNC`**
 → Re-run `python src/ingestion/ingest.py`. The index and chunks got out of sync
 (this should not happen with the current code but can if you manually edited files).
 
 **`Model loading failed` on server start**
-→ Run ingestion first. The server loads the FAISS index at startup.
+→ Check the container logs or Python traceback. The server loads the FAISS
+index and ML models at startup.
 
 **`429 Too Many Requests` from Groq**
 → Groq free tier limits to ~30 RPM. The compliance checker makes at most 19 real
@@ -232,7 +236,8 @@ Total ~1.4 GB on first run. Models are cached by sentence-transformers in
 `~/.cache/huggingface/` after the first download.
 
 **Frontend shows "server offline"**
-→ Make sure `python src/api/app.py` is running in a separate terminal.
+→ Make sure `python scripts/start.py` is running and check
+`http://localhost:8080/api/health`.
 
 ---
 
@@ -257,7 +262,7 @@ python scripts/run_compliance.py --pdf "data/docs/Privacy_Policy_hdfc.pdf"
 python scripts/ask.py
 
 # API + Frontend
-python src/api/app.py &          # start API in background
-python -m http.server 8080 --directory frontend
-# open http://localhost:8080
+python scripts/start.py &
+python -m http.server 8081 --directory docs
+# open http://localhost:8080 for the API or http://localhost:8081 for the frontend
 ```
